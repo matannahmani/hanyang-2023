@@ -1,0 +1,1804 @@
+Chapter 1
+
+Machine learning
+For the journal, see Machine Learning (journal).
+
+"Computing Machinery and Intelligence" that the question “Can machines think?" be replaced with the ques[1] tion “Can machines do what we (as thinking entities) can
+Machine learning is a subﬁeld of computer science
+[9]
+that evolved from the study of pattern recognition and do?"
+computational learning theory in artiﬁcial intelligence.[1]
+Machine learning explores the construction and study of
+1.1.1 Types of problems and tasks
+algorithms that can learn from and make predictions on
+data.[2] Such algorithms operate by building a model from
+Machine learning tasks are typically classiﬁed into three
+example inputs in order to make data-driven predictions
+broad categories, depending on the nature of the learnor decisions,[3]:2 rather than following strictly static proing “signal” or “feedback” available to a learning system.
+gram instructions.
+These are:[10]
+Machine learning is closely related to and often overlaps with computational statistics; a discipline that also
+• Supervised learning: The computer is presented
+specializes in prediction-making. It has strong ties to
+with example inputs and their desired outputs, given
+mathematical optimization, which deliver methods, theby a “teacher”, and the goal is to learn a general rule
+ory and application domains to the ﬁeld. Machine learnthat maps inputs to outputs.
+ing is employed in a range of computing tasks where
+designing and programming explicit algorithms is in• Unsupervised learning: No labels are given to the
+feasible. Example applications include spam ﬁltering,
+learning algorithm, leaving it on its own to ﬁnd strucoptical character recognition (OCR),[4] search engines
+ture in its input. Unsupervised learning can be a goal
+and computer vision. Machine learning is sometimes
+in itself (discovering hidden patterns in data) or a
+conﬂated with data mining,[5] although that focuses more
+means towards an end.
+on exploratory data analysis.[6] Machine learning and pat• Reinforcement learning: A computer program intern recognition “can be viewed as two facets of the same
+[3]:vii
+teracts with a dynamic environment in which it must
+ﬁeld.”
+perform a certain goal (such as driving a vehicle),
+When employed in industrial contexts, machine learnwithout a teacher explicitly telling it whether it has
+ing methods may be referred to as predictive analytics or
+come close to its goal or not. Another example
+predictive modelling.
+is learning to play a game by playing against an
+opponent.[3]:3
+
+1.1 Overview
+
+Between supervised and unsupervised learning is semisupervised learning, where the teacher gives an incomIn 1959, Arthur Samuel deﬁned machine learning as a plete training signal: a training set with some (often
+“Field of study that gives computers the ability to learn many) of the target outputs missing. Transduction is a
+without being explicitly programmed”.[7]
+special case of this principle where the entire set of probTom M. Mitchell provided a widely quoted, more for- lem instances is known at learning time, except that part
+mal deﬁnition: “A computer program is said to learn of the targets are missing.
+from experience E with respect to some class of tasks T Among other categories of machine learning problems,
+and performance measure P, if its performance at tasks learning to learn learns its own inductive bias based on
+in T, as measured by P, improves with experience E”.[8] previous experience. Developmental learning, elaboThis deﬁnition is notable for its deﬁning machine learn- rated for robot learning, generates its own sequences (also
+ing in fundamentally operational rather than cognitive called curriculum) of learning situations to cumulatively
+terms, thus following Alan Turing's proposal in his paper acquire repertoires of novel skills through autonomous
+1
+
+2
+
+CHAPTER 1. MACHINE LEARNING
+
+1.2 History and relationships to
+other ﬁelds
+As a scientiﬁc endeavour, machine learning grew out
+of the quest for artiﬁcial intelligence. Already in the
+early days of AI as an academic discipline, some researchers were interested in having machines learn from
+data. They attempted to approach the problem with various symbolic methods, as well as what were then termed
+"neural networks"; these were mostly perceptrons and
+other models that were later found to be reinventions of
+the generalized linear models of statistics. Probabilistic
+reasoning was also employed, especially in automated
+medical diagnosis.[10]:488
+
+A support vector machine is a classiﬁer that divides its input space
+into two regions, separated by a linear boundary. Here, it has
+learned to distinguish black and white circles.
+
+self-exploration and social interaction with human teachers, and using guidance mechanisms such as active learning, maturation, motor synergies, and imitation.
+Another categorization of machine learning tasks arises
+when one considers the desired output of a machinelearned system:[3]:3
+• In classiﬁcation, inputs are divided into two or more
+classes, and the learner must produce a model that
+assigns unseen inputs to one (or multi-label classiﬁcation) or more of these classes. This is typically
+tackled in a supervised way. Spam ﬁltering is an example of classiﬁcation, where the inputs are email
+(or other) messages and the classes are “spam” and
+“not spam”.
+
+However, an increasing emphasis on the logical,
+knowledge-based approach caused a rift between AI and
+machine learning. Probabilistic systems were plagued
+by theoretical and practical problems of data acquisition
+and representation.[10]:488 By 1980, expert systems had
+come to dominate AI, and statistics was out of favor.[11]
+Work on symbolic/knowledge-based learning did continue within AI, leading to inductive logic programming,
+but the more statistical line of research was now outside the ﬁeld of AI proper, in pattern recognition and
+information retrieval.[10]:708–710; 755 Neural networks research had been abandoned by AI and computer science
+around the same time. This line, too, was continued outside the AI/CS ﬁeld, as "connectionism", by researchers
+from other disciplines including Hopﬁeld, Rumelhart and
+Hinton. Their main success came in the mid-1980s with
+the reinvention of backpropagation.[10]:25
+Machine learning, reorganized as a separate ﬁeld, started
+to ﬂourish in the 1990s. The ﬁeld changed its goal from
+achieving artiﬁcial intelligence to tackling solvable problems of a practical nature. It shifted focus away from
+the symbolic approaches it had inherited from AI, and
+toward methods and models borrowed from statistics and
+probability theory.[11] It also beneﬁted from the increasing availability of digitized information, and the possibility to distribute that via the internet.
+
+• In regression, also a supervised problem, the outputs
+Machine learning and data mining often employ the same
+are continuous rather than discrete.
+methods and overlap signiﬁcantly. They can be roughly
+distinguished as follows:
+• In clustering, a set of inputs is to be divided into
+groups. Unlike in classiﬁcation, the groups are not
+• Machine learning focuses on prediction, based on
+known beforehand, making this typically an unsuknown properties learned from the training data.
+pervised task.
+• Density estimation ﬁnds the distribution of inputs in
+some space.
+• Dimensionality reduction simpliﬁes inputs by mapping them into a lower-dimensional space. Topic
+modeling is a related problem, where a program is
+given a list of human language documents and is
+tasked to ﬁnd out which documents cover similar
+topics.
+
+• Data mining focuses on the discovery of (previously)
+unknown properties in the data. This is the analysis
+step of Knowledge Discovery in Databases.
+The two areas overlap in many ways: data mining uses
+many machine learning methods, but often with a slightly
+diﬀerent goal in mind. On the other hand, machine
+learning also employs data mining methods as “unsupervised learning” or as a preprocessing step to improve
+
+1.4. APPROACHES
+learner accuracy. Much of the confusion between these
+two research communities (which do often have separate conferences and separate journals, ECML PKDD
+being a major exception) comes from the basic assumptions they work with: in machine learning, performance
+is usually evaluated with respect to the ability to reproduce known knowledge, while in Knowledge Discovery and Data Mining (KDD) the key task is the discovery of previously unknown knowledge. Evaluated with
+respect to known knowledge, an uninformed (unsupervised) method will easily be outperformed by supervised
+methods, while in a typical KDD task, supervised methods cannot be used due to the unavailability of training
+data.
+Machine learning also has intimate ties to optimization:
+many learning problems are formulated as minimization
+of some loss function on a training set of examples. Loss
+functions express the discrepancy between the predictions of the model being trained and the actual problem instances (for example, in classiﬁcation, one wants
+to assign a label to instances, and models are trained
+to correctly predict the pre-assigned labels of a set examples). The diﬀerence between the two ﬁelds arises
+from the goal of generalization: while optimization algorithms can minimize the loss on a training set, machine
+learning is concerned with minimizing the loss on unseen
+samples.[12]
+
+1.2.1
+
+Relation to statistics
+
+3
+resentative of the space of occurrences) and the learner
+has to build a general model about this space that enables it to produce suﬃciently accurate predictions in new
+cases.
+The computational analysis of machine learning algorithms and their performance is a branch of theoretical
+computer science known as computational learning theory. Because training sets are ﬁnite and the future is uncertain, learning theory usually does not yield guarantees
+of the performance of algorithms. Instead, probabilistic bounds on the performance are quite common. The
+bias–variance decomposition is one way to quantify generalization error.
+In addition to performance bounds, computational learning theorists study the time complexity and feasibility of
+learning. In computational learning theory, a computation is considered feasible if it can be done in polynomial
+time. There are two kinds of time complexity results.
+Positive results show that a certain class of functions can
+be learned in polynomial time. Negative results show that
+certain classes cannot be learned in polynomial time.
+There are many similarities between machine learning
+theory and statistical inference, although they use diﬀerent terms.
+
+1.4 Approaches
+Main article: List of machine learning algorithms
+
+Machine learning and statistics are closely related ﬁelds.
+According to Michael I. Jordan, the ideas of machine
+learning, from methodological principles to theoretical 1.4.1 Decision tree learning
+tools, have had a long pre-history in statistics.[13] He also
+suggested the term data science as a placeholder to call Main article: Decision tree learning
+the overall ﬁeld.[13]
+Leo Breiman distinguished two statistical modelling Decision tree learning uses a decision tree as a predictive
+paradigms: data model and algorithmic model,[14] model, which maps observations about an item to concluwherein 'algorithmic model' means more or less the ma- sions about the item’s target value.
+chine learning algorithms like Random forest.
+Some statisticians have adopted methods from machine
+1.4.2 Association rule learning
+learning, leading to a combined ﬁeld that they call statistical learning.[15]
+Main article: Association rule learning
+
+1.3 Theory
+
+Association rule learning is a method for discovering interesting relations between variables in large databases.
+
+Main article: Computational learning theory
+
+1.4.3 Artiﬁcial neural networks
+A core objective of a learner is to generalize from its
+experience.[3][16] Generalization in this context is the ability of a learning machine to perform accurately on new,
+unseen examples/tasks after having experienced a learning data set. The training examples come from some generally unknown probability distribution (considered rep-
+
+Main article: Artiﬁcial neural network
+An artiﬁcial neural network (ANN) learning algorithm,
+usually called “neural network” (NN), is a learning algorithm that is inspired by the structure and func-
+
+4
+
+CHAPTER 1. MACHINE LEARNING
+
+tional aspects of biological neural networks. Computations are structured in terms of an interconnected
+group of artiﬁcial neurons, processing information using
+a connectionist approach to computation. Modern neural networks are non-linear statistical data modeling tools.
+They are usually used to model complex relationships between inputs and outputs, to ﬁnd patterns in data, or to
+capture the statistical structure in an unknown joint probability distribution between observed variables.
+
+1.4.4
+
+Inductive logic programming
+
+Main article: Inductive logic programming
+Inductive logic programming (ILP) is an approach to rule
+learning using logic programming as a uniform representation for input examples, background knowledge, and
+hypotheses. Given an encoding of the known background
+knowledge and a set of examples represented as a logical database of facts, an ILP system will derive a hypothesized logic program that entails all positive and no
+negative examples. Inductive programming is a related
+ﬁeld that considers any kind of programming languages
+for representing hypotheses (and not only logic programming), such as functional programs.
+
+1.4.5
+
+Support vector machines
+
+1.4.7 Bayesian networks
+Main article: Bayesian network
+A Bayesian network, belief network or directed acyclic
+graphical model is a probabilistic graphical model that
+represents a set of random variables and their conditional
+independencies via a directed acyclic graph (DAG). For
+example, a Bayesian network could represent the probabilistic relationships between diseases and symptoms.
+Given symptoms, the network can be used to compute
+the probabilities of the presence of various diseases. Efﬁcient algorithms exist that perform inference and learning.
+
+1.4.8 Reinforcement learning
+Main article: Reinforcement learning
+Reinforcement learning is concerned with how an agent
+ought to take actions in an environment so as to maximize some notion of long-term reward. Reinforcement
+learning algorithms attempt to ﬁnd a policy that maps
+states of the world to the actions the agent ought to take
+in those states. Reinforcement learning diﬀers from the
+supervised learning problem in that correct input/output
+pairs are never presented, nor sub-optimal actions explicitly corrected.
+
+Main article: Support vector machines
+
+1.4.9 Representation learning
+Support vector machines (SVMs) are a set of related
+supervised learning methods used for classiﬁcation and
+regression. Given a set of training examples, each marked
+as belonging to one of two categories, an SVM training
+algorithm builds a model that predicts whether a new example falls into one category or the other.
+
+Main article: Representation learning
+
+Several learning algorithms, mostly unsupervised learning algorithms, aim at discovering better representations
+of the inputs provided during training. Classical examples include principal components analysis and cluster
+analysis. Representation learning algorithms often at1.4.6 Clustering
+tempt to preserve the information in their input but transform it in a way that makes it useful, often as a preMain article: Cluster analysis
+processing step before performing classiﬁcation or predictions, allowing to reconstruct the inputs coming from
+Cluster analysis is the assignment of a set of observations the unknown data generating distribution, while not being
+into subsets (called clusters) so that observations within necessarily faithful for conﬁgurations that are implausible
+the same cluster are similar according to some predes- under that distribution.
+ignated criterion or criteria, while observations drawn Manifold learning algorithms attempt to do so under
+from diﬀerent clusters are dissimilar. Diﬀerent cluster- the constraint that the learned representation is lowing techniques make diﬀerent assumptions on the struc- dimensional. Sparse coding algorithms attempt to do
+ture of the data, often deﬁned by some similarity metric so under the constraint that the learned representation is
+and evaluated for example by internal compactness (simi- sparse (has many zeros). Multilinear subspace learning
+larity between members of the same cluster) and separa- algorithms aim to learn low-dimensional representations
+tion between diﬀerent clusters. Other methods are based directly from tensor representations for multidimensional
+on estimated density and graph connectivity. Clustering is data, without reshaping them into (high-dimensional)
+a method of unsupervised learning, and a common tech- vectors.[17] Deep learning algorithms discover multiple
+nique for statistical data analysis.
+levels of representation, or a hierarchy of features, with
+
+1.5. APPLICATIONS
+
+5
+
+higher-level, more abstract features deﬁned in terms of techniques have been used to improve the performance
+(or generating) lower-level features. It has been argued of genetic and evolutionary algorithms.[23]
+that an intelligent machine is one that learns a representation that disentangles the underlying factors of variation
+that explain the observed data.[18]
+
+1.5 Applications
+
+1.4.10
+
+Similarity and metric learning
+
+Main article: Similarity learning
+In this problem, the learning machine is given pairs of examples that are considered similar and pairs of less similar objects. It then needs to learn a similarity function (or
+a distance metric function) that can predict if new objects
+are similar. It is sometimes used in Recommendation systems.
+
+Applications for machine learning include:
+• Adaptive websites
+• Aﬀective computing
+• Bioinformatics
+• Brain-machine interfaces
+• Cheminformatics
+• Classifying DNA sequences
+
+1.4.11
+
+Sparse dictionary learning
+
+• Computational advertising
+
+In this method, a datum is represented as a linear combination of basis functions, and the coeﬃcients are assumed to be sparse. Let x be a d-dimensional datum, D
+be a d by n matrix, where each column of D represents
+a basis function. r is the coeﬃcient to represent x using
+D. Mathematically, sparse dictionary learning means the
+following x ≈ Dr where r is sparse. Generally speaking,
+n is assumed to be larger than d to allow the freedom for
+a sparse representation.
+
+• Computational ﬁnance
+
+Learning a dictionary along with sparse representations is strongly NP-hard and also diﬃcult to solve
+approximately.[19] A popular heuristic method for sparse
+dictionary learning is K-SVD.
+
+• Internet fraud detection
+
+Sparse dictionary learning has been applied in several
+contexts. In classiﬁcation, the problem is to determine
+which classes a previously unseen datum belongs to. Suppose a dictionary for each class has already been built.
+Then a new datum is associated with the class such that
+it’s best sparsely represented by the corresponding dictionary. Sparse dictionary learning has also been applied
+in image de-noising. The key idea is that a clean image
+patch can be sparsely represented by an image dictionary,
+but the noise cannot.[20]
+
+• Computer vision, including object recognition
+• Detecting credit card fraud
+• Game playing[24]
+• Information retrieval
+
+• Machine perception
+• Medical diagnosis
+• Natural language processing[25]
+• Optimization and metaheuristic
+• Recommender systems
+• Robot locomotion
+• Search engines
+• Sentiment analysis (or opinion mining)
+
+1.4.12
+
+Genetic algorithms
+
+Main article: Genetic algorithm
+A genetic algorithm (GA) is a search heuristic that mimics the process of natural selection, and uses methods such
+as mutation and crossover to generate new genotype in
+the hope of ﬁnding good solutions to a given problem. In
+machine learning, genetic algorithms found some uses in
+the 1980s and 1990s.[21][22] Vice versa, machine learning
+
+• Sequence mining
+• Software engineering
+• Speech and handwriting recognition
+• Stock market analysis
+• Structural health monitoring
+• Syntactic pattern recognition
+
+6
+
+CHAPTER 1. MACHINE LEARNING
+
+In 2006, the online movie company Netﬂix held the ﬁrst
+• Spark
+"Netﬂix Prize" competition to ﬁnd a program to better
+• Yooreeka
+predict user preferences and improve the accuracy on its
+existing Cinematch movie recommendation algorithm by
+• Weka
+at least 10%. A joint team made up of researchers from
+AT&T Labs-Research in collaboration with the teams Big
+Chaos and Pragmatic Theory built an ensemble model to 1.6.2 Commercial software with openwin the Grand Prize in 2009 for $1 million.[26] Shortly
+source editions
+after the prize was awarded, Netﬂix realized that viewers’ ratings were not the best indicators of their view• KNIME
+ing patterns (“everything is a recommendation”) and they
+changed their recommendation engine accordingly.[27]
+• RapidMiner
+In 2010 The Wall Street Journal wrote about money management ﬁrm Rebellion Research’s use of machine learning to predict economic movements. The article de- 1.6.3 Commercial software
+scribes Rebellion Research’s prediction of the ﬁnancial
+• Amazon Machine Learning
+crisis and economic recovery.[28]
+In 2014 it has been reported that a machine learning algorithm has been applied in Art History to study ﬁne art
+paintings, and that it may have revealed previously unrecognized inﬂuences between artists.[29]
+
+1.6 Software
+
+• Angoss KnowledgeSTUDIO
+• Databricks
+• IBM SPSS Modeler
+• KXEN Modeler
+• LIONsolver
+
+Software suites containing a variety of machine learning
+algorithms include the following:
+
+• Mathematica
+
+1.6.1
+
+• Microsoft Azure Machine Learning
+
+Open-source software
+
+• dlib
+• ELKI
+• Encog
+• H2O
+
+• MATLAB
+
+• Neural Designer
+• NeuroSolutions
+• Oracle Data Mining
+• RCASE
+
+• Mahout
+
+• SAS Enterprise Miner
+
+• mlpy
+
+• STATISTICA Data Miner
+
+• MLPACK
+• MOA (Massive Online Analysis)
+
+1.7 Journals
+
+• ND4J with Deeplearning4j
+
+• Journal of Machine Learning Research
+
+• OpenCV
+
+• Machine Learning
+
+• OpenNN
+
+• Neural Computation
+
+• Orange
+• R
+• scikit-learn
+
+1.8 Conferences
+
+• Shogun
+
+• Conference on Neural Information Processing Systems
+
+• Torch (machine learning)
+
+• International Conference on Machine Learning
+
+1.10. REFERENCES
+
+7
+
+1.9 See also
+
+[10] Russell, Stuart; Norvig, Peter (2003) [1995]. Artiﬁcial
+Intelligence: A Modern Approach (2nd ed.). Prentice Hall.
+ISBN 978-0137903955.
+
+• Adaptive control
+• Adversarial machine learning
+• Automatic reasoning
+• Cache language model
+• Cognitive model
+• Cognitive science
+• Computational intelligence
+• Computational neuroscience
+• Ethics of artiﬁcial intelligence
+• Existential risk of artiﬁcial general intelligence
+• Explanation-based learning
+• Hidden Markov model
+• Important publications in machine learning
+• List of machine learning algorithms
+
+1.10 References
+[1] http://www.britannica.com/EBchecked/topic/1116194/
+machine-learning This is a tertiary source that clearly
+includes information from other sources but does not
+name them.
+[2] Ron Kohavi; Foster Provost (1998). “Glossary of terms”.
+Machine Learning 30: 271–274.
+[3] C. M. Bishop (2006). Pattern Recognition and Machine
+Learning. Springer. ISBN 0-387-31073-8.
+[4] Wernick, Yang, Brankov, Yourganov and Strother, Machine Learning in Medical Imaging, IEEE Signal Processing Magazine, vol. 27, no. 4, July 2010, pp. 25-38
+[5] Mannila, Heikki (1996). Data mining: machine learning,
+statistics, and databases. Int'l Conf. Scientiﬁc and Statistical Database Management. IEEE Computer Society.
+[6] Friedman, Jerome H. (1998). “Data Mining and Statistics:
+What’s the connection?". Computing Science and Statistics
+29 (1): 3–9.
+[7] Phil Simon (March 18, 2013). Too Big to Ignore: The
+Business Case for Big Data. Wiley. p. 89. ISBN 978-1118-63817-0.
+[8]
+
+• Mitchell, T. (1997). Machine Learning, McGraw
+Hill. ISBN 0-07-042807-7, p.2.
+
+[9] Harnad, Stevan (2008), “The Annotation Game: On Turing (1950) on Computing, Machinery, and Intelligence”,
+in Epstein, Robert; Peters, Grace, The Turing Test Sourcebook: Philosophical and Methodological Issues in the Quest
+for the Thinking Computer, Kluwer
+
+[11] Langley, Pat (2011). “The changing science of machine learning”. Machine Learning 82 (3): 275–279.
+doi:10.1007/s10994-011-5242-y.
+[12] Le Roux, Nicolas; Bengio, Yoshua; Fitzgibbon, Andrew
+(2012). “Improving First and Second-Order Methods by
+Modeling Uncertainty”. In Sra, Suvrit; Nowozin, Sebastian; Wright, Stephen J. Optimization for Machine Learning. MIT Press. p. 404.
+[13] MI Jordan (2014-09-10). “statistics and machine learning”. reddit. Retrieved 2014-10-01.
+[14] http://projecteuclid.org/download/pdf_1/euclid.ss/
+1009213726
+[15] Gareth James; Daniela Witten; Trevor Hastie; Robert Tibshirani (2013). An Introduction to Statistical Learning.
+Springer. p. vii.
+[16] Mehryar Mohri, Afshin Rostamizadeh, Ameet Talwalkar
+(2012) Foundations of Machine Learning, MIT Press
+ISBN 978-0-262-01825-8.
+[17] Lu, Haiping; Plataniotis, K.N.; Venetsanopoulos, A.N.
+(2011). “A Survey of Multilinear Subspace Learning for
+Tensor Data” (PDF). Pattern Recognition 44 (7): 1540–
+1551. doi:10.1016/j.patcog.2011.01.004.
+[18] Yoshua Bengio (2009). Learning Deep Architectures for
+AI. Now Publishers Inc. pp. 1–3. ISBN 978-1-60198294-0.
+[19] A. M. Tillmann, "On the Computational Intractability of
+Exact and Approximate Dictionary Learning", IEEE Signal Processing Letters 22(1), 2015: 45–49.
+[20] Aharon, M, M Elad, and A Bruckstein. 2006. “KSVD: An Algorithm for Designing Overcomplete Dictionaries for Sparse Representation.” Signal Processing,
+IEEE Transactions on 54 (11): 4311-4322
+[21] Goldberg, David E.; Holland, John H. (1988). “Genetic
+algorithms and machine learning”. Machine Learning 3
+(2): 95–99.
+[22] Michie, D.; Spiegelhalter, D. J.; Taylor, C. C. (1994). Machine Learning, Neural and Statistical Classiﬁcation. Ellis
+Horwood.
+[23] Zhang, Jun; Zhan, Zhi-hui; Lin, Ying; Chen, Ni; Gong,
+Yue-jiao; Zhong, Jing-hui; Chung, Henry S.H.; Li, Yun;
+Shi, Yu-hui (2011). “Evolutionary Computation Meets
+Machine Learning: A Survey” (PDF). Computational Intelligence Magazine (IEEE) 6 (4): 68–75.
+[24] Tesauro, Gerald (March 1995). “Temporal Diﬀerence
+Learning and TD-Gammon". Communications of the
+ACM 38 (3).
+[25] Daniel Jurafsky and James H. Martin (2009). Speech and
+Language Processing. Pearson Education. pp. 207 ﬀ.
+[26] “BelKor Home Page” research.att.com
+
+8
+
+CHAPTER 1. MACHINE LEARNING
+
+[27]
+[28]
+[29] When A Machine Learning Algorithm Studied Fine Art
+Paintings, It Saw Things Art Historians Had Never Noticed, The Physics at ArXiv blog
+
+1.11 Further reading
+• Mehryar Mohri, Afshin Rostamizadeh, Ameet Talwalkar (2012). Foundations of Machine Learning,
+The MIT Press. ISBN 978-0-262-01825-8.
+• Ian H. Witten and Eibe Frank (2011). Data Mining: Practical machine learning tools and techniques Morgan Kaufmann, 664pp., ISBN 978-0-12374856-0.
+• Sergios Theodoridis, Konstantinos Koutroumbas
+(2009) “Pattern Recognition”, 4th Edition, Academic Press, ISBN 978-1-59749-272-0.
+• Mierswa, Ingo and Wurst, Michael and Klinkenberg, Ralf and Scholz, Martin and Euler, Timm:
+YALE: Rapid Prototyping for Complex Data Mining
+Tasks, in Proceedings of the 12th ACM SIGKDD
+International Conference on Knowledge Discovery
+and Data Mining (KDD-06), 2006.
+• Bing Liu (2007), Web Data Mining: Exploring Hyperlinks, Contents and Usage Data. Springer, ISBN
+3-540-37881-2
+• Toby Segaran (2007), Programming Collective Intelligence, O'Reilly, ISBN 0-596-52932-5
+• Huang T.-M., Kecman V., Kopriva I. (2006),
+Kernel Based Algorithms for Mining Huge Data
+Sets, Supervised, Semi-supervised, and Unsupervised Learning, Springer-Verlag, Berlin, Heidelberg, 260 pp. 96 illus., Hardcover, ISBN 3-54031681-7.
+• Ethem Alpaydın (2004) Introduction to Machine
+Learning (Adaptive Computation and Machine
+Learning), MIT Press, ISBN 0-262-01211-1
+• MacKay, D.J.C. (2003). Information Theory, Inference, and Learning Algorithms, Cambridge University Press. ISBN 0-521-64298-1.
+• KECMAN Vojislav (2001), Learning and Soft
+Computing, Support Vector Machines, Neural Networks and Fuzzy Logic Models, The MIT Press,
+Cambridge, MA, 608 pp., 268 illus., ISBN 0-26211255-8.
+• Trevor Hastie, Robert Tibshirani and Jerome Friedman (2001). The Elements of Statistical Learning,
+Springer. ISBN 0-387-95284-5.
+
+• Richard O. Duda, Peter E. Hart, David G. Stork
+(2001) Pattern classiﬁcation (2nd edition), Wiley,
+New York, ISBN 0-471-05669-3.
+• Bishop, C.M. (1995). Neural Networks for Pattern
+Recognition, Oxford University Press. ISBN 0-19853864-2.
+• Ryszard S. Michalski, George Tecuci (1994), Machine Learning: A Multistrategy Approach, Volume
+IV, Morgan Kaufmann, ISBN 1-55860-251-8.
+• Sholom Weiss and Casimir Kulikowski (1991).
+Computer Systems That Learn, Morgan Kaufmann.
+ISBN 1-55860-065-5.
+• Yves Kodratoﬀ, Ryszard S. Michalski (1990), Machine Learning: An Artiﬁcial Intelligence Approach,
+Volume III, Morgan Kaufmann, ISBN 1-55860119-8.
+• Ryszard S. Michalski, Jaime G. Carbonell, Tom
+M. Mitchell (1986), Machine Learning: An Artiﬁcial Intelligence Approach, Volume II, Morgan Kaufmann, ISBN 0-934613-00-1.
+• Ryszard S. Michalski, Jaime G. Carbonell, Tom M.
+Mitchell (1983), Machine Learning: An Artiﬁcial
+Intelligence Approach, Tioga Publishing Company,
+ISBN 0-935382-05-4.
+• Vladimir Vapnik (1998). Statistical Learning Theory. Wiley-Interscience, ISBN 0-471-03003-1.
+• Ray Solomonoﬀ, An Inductive Inference Machine,
+IRE Convention Record, Section on Information
+Theory, Part 2, pp., 56-62, 1957.
+• Ray Solomonoﬀ, "An Inductive Inference Machine" A privately circulated report from the 1956
+Dartmouth Summer Research Conference on AI.
+
+1.12 External links
+• International Machine Learning Society
+• Popular online course by Andrew Ng, at Coursera.
+It uses GNU Octave. The course is a free version
+of Stanford University's actual course taught by Ng,
+whose lectures are also available for free.
+• Machine Learning Video Lectures
+• mloss is an academic database of open-source machine learning software.
+
+Chapter 9
+
+Data mining
+Not to be confused with analytics, information extrac- step might identify multiple groups in the data, which can
+tion, or data analysis.
+then be used to obtain more accurate prediction results
+by a decision support system. Neither the data collection,
+Data mining (the analysis step of the “Knowledge Dis- data preparation, nor result interpretation and reporting
+are part of the data mining step, but do belong to the overcovery in Databases” process, or KDD),[1] an interdisci[2][3][4]
+plinary subﬁeld of computer science,
+is the com- all KDD process as additional steps.
+putational process of discovering patterns in large data
+sets involving methods at the intersection of artiﬁcial intelligence, machine learning, statistics, and database systems.[2] The overall goal of the data mining process is
+to extract information from a data set and transform it
+into an understandable structure for further use.[2] Aside
+from the raw analysis step, it involves database and
+data management aspects, data pre-processing, model
+and inference considerations, interestingness metrics,
+complexity considerations, post-processing of discovered
+structures, visualization, and online updating.[2]
+
+The related terms data dredging, data ﬁshing, and data
+snooping refer to the use of data mining methods to sample parts of a larger population data set that are (or may
+be) too small for reliable statistical inferences to be made
+about the validity of any patterns discovered. These
+methods can, however, be used in creating new hypotheses to test against the larger data populations.
+
+9.1 Etymology
+
+The term is a misnomer, because the goal is the extraction of patterns and knowledge from large amount
+of data, not the extraction of data itself.[5] It also is
+a buzzword[6] and is frequently applied to any form of
+large-scale data or information processing (collection,
+extraction, warehousing, analysis, and statistics) as well
+as any application of computer decision support system, including artiﬁcial intelligence, machine learning,
+and business intelligence. The popular book “Data mining: Practical machine learning tools and techniques with
+Java”[7] (which covers mostly machine learning material)
+was originally to be named just “Practical machine learning”, and the term “data mining” was only added for marketing reasons.[8] Often the more general terms "(large
+scale) data analysis", or "analytics" – or when referring to
+actual methods, artiﬁcial intelligence and machine learning – are more appropriate.
+
+In the 1960s, statisticians used terms like “Data Fishing” or “Data Dredging” to refer to what they considered the bad practice of analyzing data without an a-priori
+hypothesis. The term “Data Mining” appeared around
+1990 in the database community. For a short time in
+1980s, a phrase “database mining"™, was used, but since
+it was trademarked by HNC, a San Diego-based company, to pitch their Database Mining Workstation;[9] researchers consequently turned to “data mining”. Other
+terms used include Data Archaeology, Information Harvesting, Information Discovery, Knowledge Extraction,
+etc. Gregory Piatetsky-Shapiro coined the term “Knowledge Discovery in Databases” for the ﬁrst workshop on
+the same topic (KDD-1989) and this term became more
+popular in AI and Machine Learning Community. However, the term data mining became more popular in the
+business and press communities.[10] Currently, Data MinThe actual data mining task is the automatic or semi- ing and Knowledge Discovery are used interchangeably.
+automatic analysis of large quantities of data to ex- Since about 2007, “Predictive Analytics” and since 2011,
+tract previously unknown, interesting patterns such as “Data Science” terms were also used to describe this ﬁeld.
+groups of data records (cluster analysis), unusual records
+(anomaly detection), and dependencies (association rule
+mining). This usually involves using database techniques
+such as spatial indices. These patterns can then be seen 9.2 Background
+as a kind of summary of the input data, and may be used
+in further analysis or, for example, in machine learning The manual extraction of patterns from data has occurred
+and predictive analytics. For example, the data mining for centuries. Early methods of identifying patterns in
+76
+
+9.3. PROCESS
+data include Bayes’ theorem (1700s) and regression analysis (1800s). The proliferation, ubiquity and increasing power of computer technology has dramatically increased data collection, storage, and manipulation ability. As data sets have grown in size and complexity, direct “hands-on” data analysis has increasingly been augmented with indirect, automated data processing, aided
+by other discoveries in computer science, such as neural
+networks, cluster analysis, genetic algorithms (1950s),
+decision trees and decision rules (1960s), and support
+vector machines (1990s). Data mining is the process
+of applying these methods with the intention of uncovering hidden patterns[11] in large data sets. It bridges
+the gap from applied statistics and artiﬁcial intelligence
+(which usually provide the mathematical background) to
+database management by exploiting the way data is stored
+and indexed in databases to execute the actual learning
+and discovery algorithms more eﬃciently, allowing such
+methods to be applied to ever larger data sets.
+
+9.2.1
+
+Research and evolution
+
+77
+• PAKDD Conference – The annual Paciﬁc-Asia
+Conference on Knowledge Discovery and Data Mining
+• PAW Conference – Predictive Analytics World
+• SDM Conference – SIAM International Conference
+on Data Mining (SIAM)
+• SSTD Symposium – Symposium on Spatial and
+Temporal Databases
+• WSDM Conference – ACM Conference on Web
+Search and Data Mining
+Data mining topics are also present on many data management/database conferences such as the ICDE Conference, SIGMOD Conference and International Conference on Very Large Data Bases
+
+9.3 Process
+
+The premier professional body in the ﬁeld is the The Knowledge Discovery in Databases (KDD) proAssociation for Computing Machinery's (ACM) Special cess is commonly deﬁned with the stages:
+Interest Group (SIG) on Knowledge Discovery and Data
+Mining (SIGKDD).[12][13] Since 1989 this ACM SIG has
+(1) Selection
+hosted an annual international conference and published
+(2) Pre-processing
+its proceedings,[14] and since 1999 it has published a bian(3) Transformation
+nual academic journal titled “SIGKDD Explorations”.[15]
+(4) Data Mining
+Computer science conferences on data mining include:
+(5) Interpretation/Evaluation.[1]
+• CIKM Conference – ACM Conference on InformaIt exists, however, in many variations on this theme, such
+tion and Knowledge Management
+as the Cross Industry Standard Process for Data Mining
+• DMIN Conference – International Conference on (CRISP-DM) which deﬁnes six phases:
+Data Mining
+• DMKD Conference – Research Issues on Data Mining and Knowledge Discovery
+• ECDM Conference – European Conference on Data
+Mining
+• ECML-PKDD Conference – European Conference
+on Machine Learning and Principles and Practice of
+Knowledge Discovery in Databases
+
+(1) Business Understanding
+(2) Data Understanding
+(3) Data Preparation
+(4) Modeling
+(5) Evaluation
+(6) Deployment
+
+or a simpliﬁed process such as (1) pre-processing, (2) data
+• EDM Conference – International Conference on mining, and (3) results validation.
+Educational Data Mining
+Polls conducted in 2002, 2004, and 2007 show that
+is the leading methodology
+• ICDM Conference – IEEE International Conference the CRISP-DM methodology
+[16][17][18]
+The only other data mining
+used
+by
+data
+miners.
+on Data Mining
+standard named in these polls was SEMMA. However, 3• KDD Conference – ACM SIGKDD Conference on 4 times as many people reported using CRISP-DM. Several teams of researchers have published reviews of data
+Knowledge Discovery and Data Mining
+mining process models,[19][20] and Azevedo and Santos
+• MLDM Conference – Machine Learning and Data conducted a comparison of CRISP-DM and SEMMA in
+Mining in Pattern Recognition
+2008.[21]
+
+78
+
+9.3.1
+
+CHAPTER 9. DATA MINING
+
+Pre-processing
+
+A simple version of this problem in machine learning is
+known as overﬁtting, but the same problem can arise at
+Before data mining algorithms can be used, a target data diﬀerent phases of the process and thus a train/test split
+set must be assembled. As data mining can only uncover - when applicable at all - may not be suﬃcient to prevent
+patterns actually present in the data, the target data set this from happening.
+must be large enough to contain these patterns while reThe ﬁnal step of knowledge discovery from data is to vermaining concise enough to be mined within an acceptable
+ify that the patterns produced by the data mining algotime limit. A common source for data is a data mart or
+rithms occur in the wider data set. Not all patterns found
+data warehouse. Pre-processing is essential to analyze the
+by the data mining algorithms are necessarily valid. It is
+multivariate data sets before data mining. The target set
+common for the data mining algorithms to ﬁnd patterns
+is then cleaned. Data cleaning removes the observations
+in the training set which are not present in the general
+containing noise and those with missing data.
+data set. This is called overﬁtting. To overcome this, the
+evaluation uses a test set of data on which the data mining algorithm was not trained. The learned patterns are
+9.3.2 Data mining
+applied to this test set, and the resulting output is compared to the desired output. For example, a data mining
+[1]
+Data mining involves six common classes of tasks:
+algorithm trying to distinguish “spam” from “legitimate”
+emails would be trained on a training set of sample e• Anomaly detection (Outlier/change/deviation demails. Once trained, the learned patterns would be aptection) – The identiﬁcation of unusual data records,
+plied to the test set of e-mails on which it had not been
+that might be interesting or data errors that require
+trained. The accuracy of the patterns can then be meafurther investigation.
+sured from how many e-mails they correctly classify. A
+number of statistical methods may be used to evaluate the
+• Association rule learning (Dependency modelling) algorithm, such as ROC curves.
+– Searches for relationships between variables. For
+example a supermarket might gather data on cus- If the learned patterns do not meet the desired standards,
+tomer purchasing habits. Using association rule subsequently it is necessary to re-evaluate and change the
+learning, the supermarket can determine which pre-processing and data mining steps. If the learned patproducts are frequently bought together and use this terns do meet the desired standards, then the ﬁnal step is
+information for marketing purposes. This is some- to interpret the learned patterns and turn them into knowledge.
+times referred to as market basket analysis.
+• Clustering – is the task of discovering groups and
+structures in the data that are in some way or another “similar”, without using known structures in
+the data.
+• Classiﬁcation – is the task of generalizing known 9.4 Standards
+structure to apply to new data. For example, an email program might attempt to classify an e-mail as
+There have been some eﬀorts to deﬁne standards for
+“legitimate” or as “spam”.
+the data mining process, for example the 1999 European Cross Industry Standard Process for Data Mining
+• Regression – attempts to ﬁnd a function which mod(CRISP-DM 1.0) and the 2004 Java Data Mining stanels the data with the least error.
+dard (JDM 1.0). Development on successors to these processes (CRISP-DM 2.0 and JDM 2.0) was active in 2006,
+• Summarization – providing a more compact repre- but has stalled since. JDM 2.0 was withdrawn without
+sentation of the data set, including visualization and reaching a ﬁnal draft.
+report generation.
+For exchanging the extracted models – in particular for
+use in predictive analytics – the key standard is the
+Predictive Model Markup Language (PMML), which is
+9.3.3 Results validation
+an XML-based language developed by the Data MinData mining can unintentionally be misused, and can then ing Group (DMG) and supported as exchange format by
+produce results which appear to be signiﬁcant; but which many data mining applications. As the name suggests, it
+do not actually predict future behavior and cannot be only covers prediction models, a particular data mining
+reproduced on a new sample of data and bear little use. task of high importance to business applications. HowOften this results from investigating too many hypotheses ever, extensions to cover (for example) subspace clusterand not performing proper statistical hypothesis testing. ing have been proposed independently of the DMG.[22]
+
+9.5. NOTABLE USES
+
+9.5 Notable uses
+See also: Category:Applied data mining.
+
+9.5.1
+
+Games
+
+Since the early 1960s, with the availability of oracles
+for certain combinatorial games, also called tablebases
+(e.g. for 3x3-chess) with any beginning conﬁguration,
+small-board dots-and-boxes, small-board-hex, and certain endgames in chess, dots-and-boxes, and hex; a new
+area for data mining has been opened. This is the extraction of human-usable strategies from these oracles.
+Current pattern recognition approaches do not seem to
+fully acquire the high level of abstraction required to be
+applied successfully. Instead, extensive experimentation
+with the tablebases – combined with an intensive study
+of tablebase-answers to well designed problems, and with
+knowledge of prior art (i.e., pre-tablebase knowledge) –
+is used to yield insightful patterns. Berlekamp (in dotsand-boxes, etc.) and John Nunn (in chess endgames) are
+notable examples of researchers doing this work, though
+they were not – and are not – involved in tablebase generation.
+
+9.5.2
+
+Business
+
+In business, data mining is the analysis of historical business activities, stored as static data in data warehouse
+databases. The goal is to reveal hidden patterns and
+trends. Data mining software uses advanced pattern
+recognition algorithms to sift through large amounts of
+data to assist in discovering previously unknown strategic business information. Examples of what businesses
+use data mining for include performing market analysis
+to identify new product bundles, ﬁnding the root cause
+of manufacturing problems, to prevent customer attrition
+and acquire new customers, cross-selling to existing customers, and proﬁling customers with more accuracy.[23]
+• In today’s world raw data is being collected by companies at an exploding rate. For example, Walmart
+processes over 20 million point-of-sale transactions
+every day. This information is stored in a centralized
+database, but would be useless without some type of
+data mining software to analyze it. If Walmart analyzed their point-of-sale data with data mining techniques they would be able to determine sales trends,
+develop marketing campaigns, and more accurately
+predict customer loyalty.[24][25]
+• Every time a credit card or a store loyalty card is
+being used, or a warranty card is being ﬁlled, data
+is being collected about the users behavior. Many
+people ﬁnd the amount of information stored about
+
+79
+us from companies, such as Google, Facebook, and
+Amazon, disturbing and are concerned about privacy. Although there is the potential for our personal data to be used in harmful, or unwanted, ways
+it is also being used to make our lives better. For
+example, Ford and Audi hope to one day collect information about customer driving patterns so they
+can recommend safer routes and warn drivers about
+dangerous road conditions.[26]
+• Data mining in customer relationship management
+applications can contribute signiﬁcantly to the bottom line. Rather than randomly contacting a
+prospect or customer through a call center or sending mail, a company can concentrate its eﬀorts on
+prospects that are predicted to have a high likelihood of responding to an oﬀer. More sophisticated
+methods may be used to optimize resources across
+campaigns so that one may predict to which channel
+and to which oﬀer an individual is most likely to respond (across all potential oﬀers). Additionally, sophisticated applications could be used to automate
+mailing. Once the results from data mining (potential prospect/customer and channel/oﬀer) are determined, this “sophisticated application” can either
+automatically send an e-mail or a regular mail. Finally, in cases where many people will take an action
+without an oﬀer, "uplift modeling" can be used to
+determine which people have the greatest increase in
+response if given an oﬀer. Uplift modeling thereby
+enables marketers to focus mailings and oﬀers on
+persuadable people, and not to send oﬀers to people who will buy the product without an oﬀer. Data
+clustering can also be used to automatically discover
+the segments or groups within a customer data set.
+• Businesses employing data mining may see a return
+on investment, but also they recognize that the number of predictive models can quickly become very
+large. For example, rather than using one model to
+predict how many customers will churn, a business
+may choose to build a separate model for each region
+and customer type. In situations where a large number of models need to be maintained, some businesses turn to more automated data mining methodologies.
+• Data mining can be helpful to human resources
+(HR) departments in identifying the characteristics
+of their most successful employees. Information obtained – such as universities attended by highly successful employees – can help HR focus recruiting efforts accordingly. Additionally, Strategic Enterprise
+Management applications help a company translate corporate-level goals, such as proﬁt and margin
+share targets, into operational decisions, such as production plans and workforce levels.[27]
+
+80
+• Market basket analysis, relates to data-mining use
+in retail sales. If a clothing store records the purchases of customers, a data mining system could
+identify those customers who favor silk shirts over
+cotton ones. Although some explanations of relationships may be diﬃcult, taking advantage of it
+is easier. The example deals with association rules
+within transaction-based data. Not all data are transaction based and logical, or inexact rules may also be
+present within a database.
+• Market basket analysis has been used to identify the
+purchase patterns of the Alpha Consumer. Analyzing the data collected on this type of user has allowed
+companies to predict future buying trends and forecast supply demands.
+• Data mining is a highly eﬀective tool in the catalog
+marketing industry. Catalogers have a rich database
+of history of their customer transactions for millions
+of customers dating back a number of years. Data
+mining tools can identify patterns among customers
+and help identify the most likely customers to respond to upcoming mailing campaigns.
+• Data mining for business applications can be integrated into a complex modeling and decision making process.[28] Reactive business intelligence (RBI)
+advocates a “holistic” approach that integrates data
+mining, modeling, and interactive visualization into
+an end-to-end discovery and continuous innovation process powered by human and automated
+learning.[29]
+• In the area of decision making, the RBI approach
+has been used to mine knowledge that is progressively acquired from the decision maker, and then
+self-tune the decision method accordingly.[30] The
+relation between the quality of a data mining system and the amount of investment that the decision maker is willing to make was formalized by
+providing an economic perspective on the value
+of “extracted knowledge” in terms of its payoﬀ to
+the organization[28] This decision-theoretic classiﬁcation framework[28] was applied to a real-world
+semiconductor wafer manufacturing line, where
+decision rules for eﬀectively monitoring and controlling the semiconductor wafer fabrication line
+were developed.[31]
+• An example of data mining related to an integratedcircuit (IC) production line is described in the
+paper “Mining IC Test Data to Optimize VLSI
+Testing.”[32] In this paper, the application of data
+mining and decision analysis to the problem of dielevel functional testing is described. Experiments
+mentioned demonstrate the ability to apply a system
+
+CHAPTER 9. DATA MINING
+of mining historical die-test data to create a probabilistic model of patterns of die failure. These patterns are then utilized to decide, in real time, which
+die to test next and when to stop testing. This system
+has been shown, based on experiments with historical test data, to have the potential to improve proﬁts
+on mature IC products. Other examples[33][34] of the
+application of data mining methodologies in semiconductor manufacturing environments suggest that
+data mining methodologies may be particularly useful when data is scarce, and the various physical and
+chemical parameters that aﬀect the process exhibit
+highly complex interactions. Another implication is
+that on-line monitoring of the semiconductor manufacturing process using data mining may be highly
+eﬀective.
+
+9.5.3 Science and engineering
+In recent years, data mining has been used widely in the
+areas of science and engineering, such as bioinformatics,
+genetics, medicine, education and electrical power engineering.
+• In the study of human genetics, sequence mining
+helps address the important goal of understanding the mapping relationship between the interindividual variations in human DNA sequence and
+the variability in disease susceptibility. In simple
+terms, it aims to ﬁnd out how the changes in an
+individual’s DNA sequence aﬀects the risks of developing common diseases such as cancer, which is
+of great importance to improving methods of diagnosing, preventing, and treating these diseases. One
+data mining method that is used to perform this task
+is known as multifactor dimensionality reduction.[35]
+• In the area of electrical power engineering, data
+mining methods have been widely used for condition
+monitoring of high voltage electrical equipment.
+The purpose of condition monitoring is to obtain
+valuable information on, for example, the status of
+the insulation (or other important safety-related parameters). Data clustering techniques – such as the
+self-organizing map (SOM), have been applied to
+vibration monitoring and analysis of transformer onload tap-changers (OLTCS). Using vibration monitoring, it can be observed that each tap change
+operation generates a signal that contains information about the condition of the tap changer contacts
+and the drive mechanisms. Obviously, diﬀerent tap
+positions will generate diﬀerent signals. However,
+there was considerable variability amongst normal
+condition signals for exactly the same tap position.
+SOM has been applied to detect abnormal conditions and to hypothesize about the nature of the
+abnormalities.[36]
+
+9.5. NOTABLE USES
+• Data mining methods have been applied to dissolved
+gas analysis (DGA) in power transformers. DGA, as
+a diagnostics for power transformers, has been available for many years. Methods such as SOM has been
+applied to analyze generated data and to determine
+trends which are not obvious to the standard DGA
+ratio methods (such as Duval Triangle).[36]
+• In educational research, where data mining has
+been used to study the factors leading students to
+choose to engage in behaviors which reduce their
+learning,[37] and to understand factors inﬂuencing
+university student retention.[38] A similar example of social application of data mining is its use
+in expertise ﬁnding systems, whereby descriptors
+of human expertise are extracted, normalized, and
+classiﬁed so as to facilitate the ﬁnding of experts,
+particularly in scientiﬁc and technical ﬁelds. In this
+way, data mining can facilitate institutional memory.
+
+81
+In 2011, the case of Sorrell v. IMS Health, Inc., decided
+by the Supreme Court of the United States, ruled that
+pharmacies may share information with outside companies. This practice was authorized under the 1st Amendment of the Constitution, protecting the “freedom of
+speech.”[47] However, the passage of the Health Information Technology for Economic and Clinical Health Act
+(HITECH Act) helped to initiate the adoption of the electronic health record (EHR) and supporting technology in
+the United States.[48] The HITECH Act was signed into
+law on February 17, 2009 as part of the American Recovery and Reinvestment Act (ARRA) and helped to open
+the door to medical data mining.[49] Prior to the signing
+of this law, estimates of only 20% of United States-based
+physicians were utilizing electronic patient records.[48]
+Søren Brunak notes that “the patient record becomes as
+information-rich as possible” and thereby “maximizes the
+data mining opportunities.”[48] Hence, electronic patient
+records further expands the possibilities regarding medical data mining thereby opening the door to a vast source
+of medical data analysis.
+
+• Data mining methods of biomedical data facilitated by domain ontologies,[39] mining clinical trial
+data,[40] and traﬃc analysis using SOM.[41]
+9.5.6
+
+Spatial data mining
+
+• In adverse drug reaction surveillance, the Uppsala
+Monitoring Centre has, since 1998, used data mining methods to routinely screen for reporting patterns indicative of emerging drug safety issues in
+the WHO global database of 4.6 million suspected
+adverse drug reaction incidents.[42] Recently, similar methodology has been developed to mine large
+collections of electronic health records for temporal patterns associating drug prescriptions to medical diagnoses.[43]
+
+Spatial data mining is the application of data mining
+methods to spatial data. The end objective of spatial data
+mining is to ﬁnd patterns in data with respect to geography. So far, data mining and Geographic Information
+Systems (GIS) have existed as two separate technologies,
+each with its own methods, traditions, and approaches to
+visualization and data analysis. Particularly, most contemporary GIS have only very basic spatial analysis functionality. The immense explosion in geographically referenced data occasioned by developments in IT, digital
+mapping, remote sensing, and the global diﬀusion of GIS
+• Data mining has been applied to software artifacts emphasizes the importance of developing data-driven inwithin the realm of software engineering: Mining ductive approaches to geographical analysis and modeling.
+Software Repositories.
+
+9.5.4
+
+Human rights
+
+Data mining of government records – particularly records
+of the justice system (i.e., courts, prisons) – enables the
+discovery of systemic human rights violations in connection to generation and publication of invalid or fraudulent
+legal records by various government agencies.[44][45]
+
+9.5.5
+
+Medical data mining
+
+Some machine learning algorithms can be applied in
+medical ﬁeld as second-opinion diagnostic tools and as
+tools for the knowledge extraction phase in the process
+of knowledge discovery in databases. One of these classiﬁers (called Prototype exemplar learning classiﬁer (PELC)[46] is able to discover syndromes as well as atypical
+clinical cases.
+
+Data mining oﬀers great potential beneﬁts for GIS-based
+applied decision-making. Recently, the task of integrating these two technologies has become of critical importance, especially as various public and private sector organizations possessing huge databases with thematic and
+geographically referenced data begin to realize the huge
+potential of the information contained therein. Among
+those organizations are:
+• oﬃces requiring analysis or dissemination of georeferenced statistical data
+• public health services searching for explanations of
+disease clustering
+• environmental agencies assessing the impact of
+changing land-use patterns on climate change
+• geo-marketing companies doing customer segmentation based on spatial location.
+
+82
+
+CHAPTER 9. DATA MINING
+
+Challenges in Spatial mining: Geospatial data repositories tend to be very large. Moreover, existing GIS datasets
+are often splintered into feature and attribute components that are conventionally archived in hybrid data management systems. Algorithmic requirements diﬀer substantially for relational (attribute) data management and
+for topological (feature) data management.[50] Related to
+this is the range and diversity of geographic data formats, which present unique challenges. The digital geographic data revolution is creating new types of data
+formats beyond the traditional “vector” and “raster” formats. Geographic data repositories increasingly include
+ill-structured data, such as imagery and geo-referenced
+multi-media.[51]
+
+9.5.8 Sensor data mining
+Wireless sensor networks can be used for facilitating the
+collection of data for spatial data mining for a variety of
+applications such as air pollution monitoring.[53] A characteristic of such networks is that nearby sensor nodes
+monitoring an environmental feature typically register
+similar values. This kind of data redundancy due to the
+spatial correlation between sensor observations inspires
+the techniques for in-network data aggregation and mining. By measuring the spatial correlation between data
+sampled by diﬀerent sensors, a wide class of specialized
+algorithms can be developed to develop more eﬃcient
+spatial data mining algorithms.[54]
+
+There are several critical research challenges in geographic knowledge discovery and data mining. Miller and 9.5.9 Visual data mining
+Han[52] oﬀer the following list of emerging research topics in the ﬁeld:
+In the process of turning from analogical into digital, large data sets have been generated, collected, and
+• Developing and supporting geographic data stored discovering statistical patterns, trends and inforwarehouses (GDW’s): Spatial properties are often mation which is hidden in data, in order to build prereduced to simple aspatial attributes in mainstream dictive patterns. Studies suggest visual data mining is
+data warehouses. Creating an integrated GDW re- faster and much more intuitive than is traditional data
+quires solving issues of spatial and temporal data in- mining.[55][56][57] See also Computer vision.
+teroperability – including diﬀerences in semantics,
+referencing systems, geometry, accuracy, and posi9.5.10 Music data mining
+tion.
+• Better spatio-temporal representations in geographic knowledge discovery: Current geographic
+knowledge discovery (GKD) methods generally use
+very simple representations of geographic objects
+and spatial relationships. Geographic data mining methods should recognize more complex geographic objects (i.e., lines and polygons) and relationships (i.e., non-Euclidean distances, direction,
+connectivity, and interaction through attributed geographic space such as terrain). Furthermore, the
+time dimension needs to be more fully integrated
+into these geographic representations and relationships.
+• Geographic knowledge discovery using diverse
+data types: GKD methods should be developed
+that can handle diverse data types beyond the traditional raster and vector models, including imagery
+and geo-referenced multimedia, as well as dynamic
+data types (video streams, animation).
+
+9.5.7
+
+Temporal data mining
+
+Data mining techniques, and in particular co-occurrence
+analysis, has been used to discover relevant similarities
+among music corpora (radio lists, CD databases) for purposes including classifying music into genres in a more
+objective manner.[58]
+
+9.5.11 Surveillance
+Data mining has been used by the U.S. government. Programs include the Total Information Awareness (TIA)
+program, Secure Flight (formerly known as ComputerAssisted Passenger Prescreening System (CAPPS II)),
+Analysis, Dissemination, Visualization, Insight, Semantic Enhancement (ADVISE),[59] and the Multi-state AntiTerrorism Information Exchange (MATRIX).[60] These
+programs have been discontinued due to controversy over
+whether they violate the 4th Amendment to the United
+States Constitution, although many programs that were
+formed under them continue to be funded by diﬀerent
+organizations or under diﬀerent names.[61]
+In the context of combating terrorism, two particularly
+plausible methods of data mining are “pattern mining”
+and “subject-based data mining”.
+
+Data may contain attributes generated and recorded at
+diﬀerent times. In this case ﬁnding meaningful relation- 9.5.12 Pattern mining
+ships in the data may require considering the temporal
+order of the attributes. A temporal relationship may in- “Pattern mining” is a data mining method that involves
+ﬁnding existing patterns in data. In this context patterns
+dicate a causal relationship, or simply an association.
+
+9.6. PRIVACY CONCERNS AND ETHICS
+
+83
+
+often means association rules. The original motivation
+for searching association rules came from the desire to
+analyze supermarket transaction data, that is, to examine
+customer behavior in terms of the purchased products.
+For example, an association rule “beer ⇒ potato chips
+(80%)" states that four out of ﬁve customers that bought
+beer also bought potato chips.
+
+The ways in which data mining can be used can in some
+cases and contexts raise questions regarding privacy, legality, and ethics.[70] In particular, data mining government or commercial data sets for national security or law
+enforcement purposes, such as in the Total Information
+Awareness Program or in ADVISE, has raised privacy
+concerns.[71][72]
+
+In the context of pattern mining as a tool to identify
+terrorist activity, the National Research Council provides the following deﬁnition: “Pattern-based data mining looks for patterns (including anomalous data patterns)
+that might be associated with terrorist activity — these
+patterns might be regarded as small signals in a large
+ocean of noise.”[62][63][64] Pattern Mining includes new
+areas such a Music Information Retrieval (MIR) where
+patterns seen both in the temporal and non temporal
+domains are imported to classical knowledge discovery
+search methods.
+
+Data mining requires data preparation which can uncover
+information or patterns which may compromise conﬁdentiality and privacy obligations. A common way for this
+to occur is through data aggregation. Data aggregation
+involves combining data together (possibly from various
+sources) in a way that facilitates analysis (but that also
+might make identiﬁcation of private, individual-level data
+deducible or otherwise apparent).[73] This is not data mining per se, but a result of the preparation of data before
+– and for the purposes of – the analysis. The threat to an
+individual’s privacy comes into play when the data, once
+compiled, cause the data miner, or anyone who has access
+to the newly compiled data set, to be able to identify speciﬁc individuals, especially when the data were originally
+anonymous.[74][75][76]
+
+9.5.13
+
+Subject-based data mining
+
+“Subject-based data mining” is a data mining method
+is made aware of the
+involving the search for associations between individu- It is recommended that an individual[73]
+following
+before
+data
+are
+collected:
+als in data. In the context of combating terrorism, the
+National Research Council provides the following deﬁnition: “Subject-based data mining uses an initiating in• the purpose of the data collection and any (known)
+dividual or other datum that is considered, based on other
+data mining projects;
+information, to be of high interest, and the goal is to de• how the data will be used;
+termine what other persons or ﬁnancial transactions or
+movements, etc., are related to that initiating datum.”[63]
+• who will be able to mine the data and use the data
+and their derivatives;
+
+9.5.14
+
+Knowledge grid
+
+• the status of security surrounding access to the data;
+Knowledge discovery “On the Grid” generally refers to
+conducting knowledge discovery in an open environment
+using grid computing concepts, allowing users to integrate data from various online data sources, as well make
+use of remote resources, for executing their data mining
+tasks. The earliest example was the Discovery Net,[65][66]
+developed at Imperial College London, which won the
+“Most Innovative Data-Intensive Application Award” at
+the ACM SC02 (Supercomputing 2002) conference and
+exhibition, based on a demonstration of a fully interactive
+distributed knowledge discovery application for a bioinformatics application. Other examples include work conducted by researchers at the University of Calabria, who
+developed a Knowledge Grid architecture for distributed
+knowledge discovery, based on grid computing.[67][68]
+
+• how collected data can be updated.
+Data may also be modiﬁed so as to become anonymous,
+so that individuals may not readily be identiﬁed.[73] However, even “de-identiﬁed"/"anonymized” data sets can potentially contain enough information to allow identiﬁcation of individuals, as occurred when journalists were
+able to ﬁnd several individuals based on a set of search
+histories that were inadvertently released by AOL.[77]
+
+9.6.1 Situation in Europe
+
+Europe has rather strong privacy laws, and eﬀorts are underway to further strengthen the rights of the consumers.
+However, the U.S.-E.U. Safe Harbor Principles currently
+9.6 Privacy concerns and ethics
+eﬀectively expose European users to privacy exploitation
+by U.S. companies. As a consequence of Edward SnowWhile the term “data mining” itself has no ethical im- den's Global surveillance disclosure, there has been inplications, it is often associated with the mining of in- creased discussion to revoke this agreement, as in particformation in relation to peoples’ behavior (ethical and ular the data will be fully exposed to the National Security
+Agency, and attempts to reach an agreement have failed.
+otherwise).[69]
+
+84
+
+9.6.2
+
+CHAPTER 9. DATA MINING
+
+Situation in the United States
+
+in America, as well as other fair use countries such as Israel, Taiwan and South Korea is viewed as being legal. As
+content mining is transformative, that is it does not supplant the original work, it is viewed as being lawful under
+fair use. For example as part of the Google Book settlement the presiding judge on the case ruled that Google’s
+digitisation project of in-copyright books was lawful, in
+part because of the transformative uses that the digitisation project displayed - one being text and data mining.[82]
+
+In the United States, privacy concerns have been addressed by the US Congress via the passage of regulatory
+controls such as the Health Insurance Portability and Accountability Act (HIPAA). The HIPAA requires individuals to give their “informed consent” regarding information they provide and its intended present and future uses.
+According to an article in Biotech Business Week', "'[i]n
+practice, HIPAA may not oﬀer any greater protection than
+the longstanding regulations in the research arena,' says
+the AAHC. More importantly, the rule’s goal of protection 9.8 Software
+through informed consent is undermined by the complexity
+of consent forms that are required of patients and participants, which approach a level of incomprehensibility to See also: Category:Data mining and machine learning
+average individuals.”[78] This underscores the necessity for software.
+data anonymity in data aggregation and mining practices.
+
+U.S. information privacy legislation such as HIPAA and
+the Family Educational Rights and Privacy Act (FERPA) 9.8.1 Free open-source data mining softapplies only to the speciﬁc areas that each such law adware and applications
+dresses. Use of data mining by the majority of businesses
+in the U.S. is not controlled by any legislation.
+• Carrot2: Text and search results clustering framework.
+
+9.7 Copyright Law
+
+• Chemicalize.org: A chemical structure miner and
+web search engine.
+
+9.7.1
+
+• ELKI: A university research project with advanced
+cluster analysis and outlier detection methods written in the Java language.
+
+Situation in Europe
+
+Due to a lack of ﬂexibilities in European copyright and
+database law, the mining of in-copyright works such
+as web mining without the permission of the copyright
+owner is not legal. Where a database is pure data in Europe there is likely to be no copyright, but database rights
+may exist so data mining becomes subject to regulations
+by the Database Directive. On the recommendation of
+the Hargreaves review this led to the UK government to
+amend its copyright law in 2014[79] to allow content mining as a limitation and exception. Only the second country in the world to do so after Japan, which introduced an
+exception in 2009 for data mining. However due to the
+restriction of the Copyright Directive, the UK exception
+only allows content mining for non-commercial purposes.
+UK copyright law also does not allow this provision to
+be overridden by contractual terms and conditions. The
+European Commission facilitated stakeholder discussion
+on text and data mining in 2013, under the title of Licences for Europe.[80] The focus on the solution to this
+legal issue being licences and not limitations and exceptions led to representatives of universities, researchers,
+libraries, civil society groups and open access publishers
+to leave the stakeholder dialogue in May 2013.[81]
+
+9.7.2
+
+Situation in the United States
+
+By contrast to Europe, the ﬂexible nature of US copyright
+law, and in particular fair use means that content mining
+
+• GATE: a natural language processing and language
+engineering tool.
+• KNIME: The Konstanz Information Miner, a user
+friendly and comprehensive data analytics framework.
+• ML-Flex: A software package that enables users
+to integrate with third-party machine-learning packages written in any programming language, execute classiﬁcation analyses in parallel across multiple computing nodes, and produce HTML reports
+of classiﬁcation results.
+• MLPACK library: a collection of ready-to-use machine learning algorithms written in the C++ language.
+• Massive Online Analysis (MOA): a real-time big
+data stream mining with concept drift tool in the
+Java programming language.
+• NLTK (Natural Language Toolkit): A suite of libraries and programs for symbolic and statistical
+natural language processing (NLP) for the Python
+language.
+• OpenNN: Open neural networks library.
+
+9.9. SEE ALSO
+• Orange: A component-based data mining and
+machine learning software suite written in the
+Python language.
+• R: A programming language and software environment for statistical computing, data mining, and
+graphics. It is part of the GNU Project.
+• SCaViS: Java cross-platform data analysis framework developed at Argonne National Laboratory.
+• SenticNet API: A semantic and aﬀective resource
+for opinion mining and sentiment analysis.
+
+85
+• RapidMiner: An environment for machine learning
+and data mining experiments.
+• SAS Enterprise Miner: data mining software provided by the SAS Institute.
+• STATISTICA Data Miner: data mining software
+provided by StatSoft.
+• Qlucore Omics Explorer: data mining software provided by Qlucore.
+
+9.8.3 Marketplace surveys
+
+• Tanagra: A visualisation-oriented data mining software, also for teaching.
+Several researchers and organizations have conducted re• Torch: An open source deep learning library for the views of data mining tools and surveys of data miners.
+Lua programming language and scientiﬁc comput- These identify some of the strengths and weaknesses of
+ing framework with wide support for machine learn- the software packages. They also provide an overview
+of the behaviors, preferences and views of data miners.
+ing algorithms.
+Some of these reports include:
+• UIMA: The UIMA (Unstructured Information
+Management Architecture) is a component frame• 2011 Wiley Interdisciplinary Reviews: Data Mining
+work for analyzing unstructured content such as text,
+and Knowledge Discovery[83]
+audio and video – originally developed by IBM.
+• Rexer Analytics Data Miner Surveys (2007–
+• Weka: A suite of machine learning software appli2013)[84]
+cations written in the Java programming language.
+• Forrester Research 2010 Predictive Analytics and
+Data Mining Solutions report[85]
+
+9.8.2
+
+Commercial data-mining software
+and applications
+
+• Angoss KnowledgeSTUDIO: data mining tool provided by Angoss.
+• Clarabridge: enterprise class text analytics solution.
+• HP Vertica Analytics Platform: data mining software provided by HP.
+• IBM SPSS Modeler: data mining software provided
+by IBM.
+• KXEN Modeler: data mining tool provided by
+KXEN.
+
+• Gartner 2008 “Magic Quadrant” report[86]
+• Robert A. Nisbet’s 2006 Three Part Series of articles “Data Mining Tools: Which One is Best For
+CRM?"[87]
+• Haughton et al.'s 2003 Review of Data Mining Software Packages in The American Statistician[88]
+• Goebel & Gruenwald 1999 “A Survey of Data
+Mining a Knowledge Discovery Software Tools” in
+SIGKDD Explorations[89]
+
+9.9 See also
+
+• Grapheme: data mining and visualization software
+provided by iChrome.
+Methods
+• LIONsolver: an integrated software application for
+data mining, business intelligence, and modeling
+that implements the Learning and Intelligent OptimizatioN (LION) approach.
+• Microsoft Analysis Services: data mining software
+provided by Microsoft.
+• NetOwl: suite of multilingual text and entity analytics products that enable data mining.
+• Oracle Data Mining: data mining software by
+Oracle.
+
+• Anomaly/outlier/change detection
+• Association rule learning
+• Classiﬁcation
+• Cluster analysis
+• Decision tree
+• Factor analysis
+• Genetic algorithms
+
+86
+
+CHAPTER 9. DATA MINING
+
+• Intention mining
+
+• Data integration
+
+• Multilinear subspace learning
+
+• Data transformation
+
+• Neural networks
+
+• Electronic discovery
+
+• Regression analysis
+
+• Information extraction
+
+• Sequence mining
+
+• Information integration
+
+• Structured data analysis
+• Support vector machines
+• Text mining
+• Online analytical processing (OLAP)
+Application domains
+• Analytics
+• Bioinformatics
+• Business intelligence
+• Data analysis
+• Data warehouse
+• Decision support system
+• Drug discovery
+• Exploratory data analysis
+• Predictive analytics
+• Web mining
+Application examples
+See also: Category:Applied data mining.
+
+• Customer analytics
+• Data mining in agriculture
+• Data mining in meteorology
+• Educational data mining
+• National Security Agency
+• Police-enforced ANPR in the UK
+• Quantitative structure–activity relationship
+• Surveillance / Mass surveillance (e.g., Stellar Wind)
+Related topics
+Data mining is about analyzing data; for information
+about extracting information out of data, see:
+
+• Named-entity recognition
+• Proﬁling (information science)
+• Web scraping
+
+9.10 References
+[1] Fayyad, Usama; Piatetsky-Shapiro, Gregory; Smyth,
+Padhraic (1996). “From Data Mining to Knowledge
+Discovery in Databases” (PDF). Retrieved 17 December
+2008.
+[2] “Data Mining Curriculum”. ACM SIGKDD. 2006-0430. Retrieved 2014-01-27.
+[3] Clifton, Christopher (2010). “Encyclopædia Britannica:
+Deﬁnition of Data Mining”. Retrieved 2010-12-09.
+[4] Hastie, Trevor; Tibshirani, Robert; Friedman, Jerome
+(2009). “The Elements of Statistical Learning: Data Mining, Inference, and Prediction”. Retrieved 2012-08-07.
+[5] Han, Jiawei; Kamber, Micheline (2001). Data mining:
+concepts and techniques. Morgan Kaufmann. p. 5.
+ISBN 9781558604896. Thus, data mining should habe
+been more appropriately named “knowledge mining from
+data,” which is unfortunately somewhat long
+[6] See e.g. OKAIRP 2005 Fall Conference, Arizona State
+University About.com: Datamining
+[7] Witten, Ian H.; Frank, Eibe; Hall, Mark A. (30 January 2011). Data Mining: Practical Machine Learning
+Tools and Techniques (3 ed.). Elsevier. ISBN 978-0-12374856-0.
+[8] Bouckaert, Remco R.; Frank, Eibe; Hall, Mark A.;
+Holmes, Geoﬀrey; Pfahringer, Bernhard; Reutemann,
+Peter; Witten, Ian H. (2010). “WEKA Experiences with
+a Java open-source project”. Journal of Machine Learning Research 11: 2533–2541. the original title, “Practical
+machine learning”, was changed ... The term “data mining” was [added] primarily for marketing reasons.
+[9] Mena, Jesús (2011). Machine Learning Forensics for Law
+Enforcement, Security, and Intelligence. Boca Raton, FL:
+CRC Press (Taylor & Francis Group). ISBN 978-1-43986069-4.
+[10] Piatetsky-Shapiro, Gregory; Parker, Gary (2011).
+“Lesson: Data Mining, and Knowledge Discovery: An
+Introduction”. Introduction to Data Mining. KD Nuggets.
+Retrieved 30 August 2012.
+
+9.10. REFERENCES
+
+[11] Kantardzic, Mehmed (2003). Data Mining: Concepts,
+Models, Methods, and Algorithms. John Wiley & Sons.
+ISBN 0-471-22852-4. OCLC 50055336.
+[12] “Microsoft Academic Search: Top conferences in data
+mining”. Microsoft Academic Search.
+[13] “Google Scholar: Top publications - Data Mining & Analysis”. Google Scholar.
+[14] Proceedings, International Conferences on Knowledge
+Discovery and Data Mining, ACM, New York.
+[15] SIGKDD Explorations, ACM, New York.
+[16] Gregory Piatetsky-Shapiro (2002) KDnuggets Methodology Poll
+[17] Gregory Piatetsky-Shapiro (2004) KDnuggets Methodology Poll
+[18] Gregory Piatetsky-Shapiro (2007) KDnuggets Methodology Poll
+[19] Óscar Marbán, Gonzalo Mariscal and Javier Segovia
+(2009); A Data Mining & Knowledge Discovery Process
+Model. In Data Mining and Knowledge Discovery in
+Real Life Applications, Book edited by: Julio Ponce and
+Adem Karahoca, ISBN 978-3-902613-53-0, pp. 438–
+453, February 2009, I-Tech, Vienna, Austria.
+[20] Lukasz Kurgan and Petr Musilek (2006); A survey of
+Knowledge Discovery and Data Mining process models.
+The Knowledge Engineering Review. Volume 21 Issue 1,
+March 2006, pp 1–24, Cambridge University Press, New
+York, NY, USA doi:10.1017/S0269888906000737
+[21] Azevedo, A. and Santos, M. F. KDD, SEMMA and
+CRISP-DM: a parallel overview. In Proceedings of the
+IADIS European Conference on Data Mining 2008, pp
+182–185.
+[22] Günnemann, Stephan; Kremer, Hardy; Seidl, Thomas
+(2011). “An extension of the PMML standard to subspace
+clustering models”. Proceedings of the 2011 workshop on
+Predictive markup language modeling - PMML '11. p. 48.
+doi:10.1145/2023598.2023605. ISBN 9781450308373.
+[23] O'Brien, J. A., & Marakas, G. M. (2011). Management Information Systems. New York, NY: McGrawHill/Irwin.
+[24] Alexander, D. (n.d.). Data Mining. Retrieved from
+The University of Texas at Austin: College of Liberal Arts: http://www.laits.utexas.edu/~{}anorman/BUS.
+FOR/course.mat/Alex/
+
+87
+
+[28] Elovici, Yuval; Braha, Dan (2003). “A DecisionTheoretic Approach to Data Mining” (PDF). IEEE Transactions on Systems, Man, and Cybernetics—Part A: Systems and Humans 33 (1).
+[29] Battiti, Roberto; and Brunato, Mauro; Reactive Business
+Intelligence. From Data to Models to Insight, Reactive
+Search Srl, Italy, February 2011. ISBN 978-88-9057950-9.
+[30] Battiti, Roberto; Passerini, Andrea (2010). “BrainComputer Evolutionary Multi-Objective Optimization (BC-EMO): a genetic algorithm adapting to
+the decision maker” (PDF). IEEE Transactions
+on Evolutionary Computation 14 (15):
+671–687.
+doi:10.1109/TEVC.2010.2058118.
+[31] Braha, Dan; Elovici, Yuval; Last, Mark (2007). “Theory
+of actionable data mining with application to semiconductor manufacturing control” (PDF). International Journal
+of Production Research 45 (13).
+[32] Fountain, Tony; Dietterich, Thomas; and Sudyka, Bill
+(2000); Mining IC Test Data to Optimize VLSI Testing, in
+Proceedings of the Sixth ACM SIGKDD International
+Conference on Knowledge Discovery & Data Mining,
+ACM Press, pp. 18–25
+[33] Braha, Dan; Shmilovici, Armin (2002). “Data Mining for
+Improving a Cleaning Process in the Semiconductor Industry” (PDF). IEEE Transactions on Semiconductor Manufacturing 15 (1).
+[34] Braha, Dan; Shmilovici, Armin (2003). “On the Use of
+Decision Tree Induction for Discovery of Interactions in a
+Photolithographic Process” (PDF). IEEE Transactions on
+Semiconductor Manufacturing 16 (4).
+[35] Zhu, Xingquan; Davidson, Ian (2007). Knowledge Discovery and Data Mining: Challenges and Realities. New
+York, NY: Hershey. p. 18. ISBN 978-1-59904-252-7.
+[36] McGrail, Anthony J.; Gulski, Edward; Allan, David;
+Birtwhistle, David; Blackburn, Trevor R.; Groot, Edwin
+R. S. “Data Mining Techniques to Assess the Condition
+of High Voltage Electrical Plant”. CIGRÉ WG 15.11 of
+Study Committee 15.
+[37] Baker, Ryan S. J. d. “Is Gaming the System Stateor-Trait? Educational Data Mining Through the MultiContextual Application of a Validated Behavioral Model”.
+Workshop on Data Mining for User Modeling 2007.
+
+[25] “Daniele Medri: Big Data & Business: An on-going revolution”. Statistics Views. 21 Oct 2013.
+
+[38] Superby Aguirre, Juan Francisco; Vandamme, JeanPhilippe; Meskens, Nadine. “Determination of factors inﬂuencing the achievement of the ﬁrst-year university students using data mining methods”. Workshop on Educational Data Mining 2006.
+
+[26] Goss, S. (2013, April 10).
+Data-mining and
+our personal privacy.
+Retrieved from The Telegraph:
+http://www.macon.com/2013/04/10/2429775/
+data-mining-and-our-personal-privacy.html
+
+[39] Zhu, Xingquan; Davidson, Ian (2007). Knowledge Discovery and Data Mining: Challenges and Realities. New
+York, NY: Hershey. pp. 163–189. ISBN 978-1-59904252-7.
+
+[27] Monk, Ellen; Wagner, Bret (2006). Concepts in Enterprise
+Resource Planning, Second Edition. Boston, MA: Thomson Course Technology. ISBN 0-619-21663-8. OCLC
+224465825.
+
+[40] Zhu, Xingquan; Davidson, Ian (2007). Knowledge Discovery and Data Mining: Challenges and Realities. New
+York, NY: Hershey. pp. 31–48. ISBN 978-1-59904-2527.
+
+88
+
+[41] Chen, Yudong; Zhang, Yi; Hu, Jianming; Li, Xiang
+(2006). “Traﬃc Data Analysis Using Kernel PCA and
+Self-Organizing Map”. IEEE Intelligent Vehicles Symposium.
+[42] Bate, Andrew; Lindquist, Marie; Edwards, I. Ralph; Olsson, Sten; Orre, Roland; Lansner, Anders; de Freitas,
+Rogelio Melhado (Jun 1998). “A Bayesian neural network method for adverse drug reaction signal generation” (PDF). European Journal of Clinical Pharmacology
+54 (4): 315–21. doi:10.1007/s002280050466. PMID
+9696956.
+[43] Norén, G. Niklas; Bate, Andrew; Hopstadius, Johan; Star,
+Kristina; and Edwards, I. Ralph (2008); Temporal Pattern
+Discovery for Trends and Transient Eﬀects: Its Application to Patient Records. Proceedings of the Fourteenth International Conference on Knowledge Discovery and Data
+Mining (SIGKDD 2008), Las Vegas, NV, pp. 963–971.
+[44] Zernik, Joseph; Data Mining as a Civic Duty – Online Public Prisoners’ Registration Systems, International
+Journal on Social Media: Monitoring, Measurement, Mining, 1: 84–96 (2010)
+[45] Zernik, Joseph; Data Mining of Online Judicial Records
+of the Networked US Federal Courts, International Journal on Social Media: Monitoring, Measurement, Mining,
+1:69–83 (2010)
+[46] Gagliardi, F (2011). “Instance-based classiﬁers applied
+to medical databases: Diagnosis and knowledge extraction”. Artiﬁcial Intelligence in Medicine 52 (3): 123–139.
+doi:10.1016/j.artmed.2011.04.002.
+[47] David G. Savage (2011-06-24). “Pharmaceutical industry: Supreme Court sides with pharmaceutical industry in
+two decisions”. Los Angeles Times. Retrieved 2012-1107.
+[48] Analyzing Medical Data. (2012). Communications of the
+ACM 55(6), 13-15. doi:10.1145/2184319.2184324
+[49] http://searchhealthit.techtarget.com/definition/
+HITECH-Act
+[50] Healey, Richard G. (1991); Database Management Systems, in Maguire, David J.; Goodchild, Michael F.; and
+Rhind, David W., (eds.), Geographic Information Systems:
+Principles and Applications, London, GB: Longman
+[51] Camara, Antonio S.; and Raper, Jonathan (eds.) (1999);
+Spatial Multimedia and Virtual Reality, London, GB: Taylor and Francis
+[52] Miller, Harvey J.; and Han, Jiawei (eds.) (2001); Geographic Data Mining and Knowledge Discovery, London,
+GB: Taylor & Francis
+[53] Ma, Y.; Richards, M.; Ghanem, M.; Guo, Y.; Hassard, J. (2008). “Air Pollution Monitoring and Mining
+Based on Sensor Grid in London”. Sensors 8 (6): 3601.
+doi:10.3390/s8063601.
+[54] Ma, Y.; Guo, Y.; Tian, X.; Ghanem, M. (2011).
+“Distributed Clustering-Based Aggregation Algorithm for
+Spatial Correlated Sensor Networks”. IEEE Sensors Journal 11 (3): 641. doi:10.1109/JSEN.2010.2056916.
+
+CHAPTER 9. DATA MINING
+
+[55] Zhao, Kaidi; and Liu, Bing; Tirpark, Thomas M.; and
+Weimin, Xiao; A Visual Data Mining Framework for Convenient Identiﬁcation of Useful Knowledge
+[56] Keim, Daniel A.; Information Visualization and Visual
+Data Mining
+[57] Burch, Michael; Diehl, Stephan; Weißgerber, Peter;
+Visual Data Mining in Software Archives
+[58] Pachet, François; Westermann, Gert; and Laigre,
+Damien; Musical Data Mining for Electronic Music Distribution, Proceedings of the 1st WedelMusic Conference,Firenze, Italy, 2001, pp. 101–106.
+[59] Government Accountability Oﬃce, Data Mining: Early
+Attention to Privacy in Developing a Key DHS Program Could Reduce Risks, GAO-07-293 (February 2007),
+Washington, DC
+[60] Secure Flight Program report, MSNBC
+[61] “Total/Terrorism Information Awareness (TIA): Is It
+Truly Dead?". Electronic Frontier Foundation (oﬃcial
+website). 2003. Retrieved 2009-03-15.
+[62] Agrawal, Rakesh; Mannila, Heikki; Srikant, Ramakrishnan; Toivonen, Hannu; and Verkamo, A. Inkeri; Fast discovery of association rules, in Advances in knowledge discovery and data mining, MIT Press, 1996, pp. 307–328
+[63] National Research Council, Protecting Individual Privacy
+in the Struggle Against Terrorists: A Framework for Program Assessment, Washington, DC: National Academies
+Press, 2008
+[64] Haag, Stephen; Cummings, Maeve; Phillips, Amy (2006).
+Management Information Systems for the information age.
+Toronto: McGraw-Hill Ryerson. p. 28. ISBN 0-07095569-7. OCLC 63194770.
+[65] Ghanem, Moustafa; Guo, Yike; Rowe, Anthony;
+Wendel, Patrick (2002).
+“Grid-based knowledge
+discovery services for high throughput informatics”.
+Proceedings 11th IEEE International Symposium on
+High Performance Distributed Computing. p. 416.
+doi:10.1109/HPDC.2002.1029946. ISBN 0-7695-16866.
+[66] Ghanem, Moustafa; Curcin, Vasa; Wendel, Patrick;
+Guo, Yike (2009).
+“Building and Using Analytical Workﬂows in Discovery Net”.
+Data Mining Techniques in Grid Computing Environments.
+p. 119. doi:10.1002/9780470699904.ch8. ISBN
+9780470699904.
+[67] Cannataro, Mario; Talia, Domenico (January 2003). “The
+Knowledge Grid: An Architecture for Distributed Knowledge Discovery” (PDF). Communications of the ACM 46
+(1): 89–93. doi:10.1145/602421.602425. Retrieved 17
+October 2011.
+[68] Talia, Domenico; Trunﬁo, Paolo (July 2010). “How distributed data mining tasks can thrive as knowledge services” (PDF). Communications of the ACM 53 (7): 132–
+137. doi:10.1145/1785414.1785451. Retrieved 17 October 2011.
+
+9.11. FURTHER READING
+
+[69] Seltzer, William. “The Promise and Pitfalls of Data Mining: Ethical Issues” (PDF).
+[70] Pitts, Chip (15 March 2007). “The End of Illegal Domestic Spying? Don't Count on It”. Washington Spectator.
+[71] Taipale, Kim A. (15 December 2003). “Data Mining and
+Domestic Security: Connecting the Dots to Make Sense
+of Data”. Columbia Science and Technology Law Review
+5 (2). OCLC 45263753. SSRN 546782.
+[72] Resig, John; and Teredesai, Ankur (2004). “A Framework for Mining Instant Messaging Services”. Proceedings of the 2004 SIAM DM Conference.
+[73] Think Before You Dig: Privacy Implications of Data Mining & Aggregation, NASCIO Research Brief, September
+2004
+[74] Ohm, Paul. “Don't Build a Database of Ruin”. Harvard
+Business Review.
+[75] Darwin Bond-Graham, Iron Cagebook - The Logical End
+of Facebook’s Patents, Counterpunch.org, 2013.12.03
+[76] Darwin Bond-Graham, Inside the Tech industry’s Startup
+Conference, Counterpunch.org, 2013.09.11
+[77] AOL search data identiﬁed individuals, SecurityFocus,
+August 2006
+[78] Biotech Business Week Editors (June 30, 2008);
+BIOMEDICINE; HIPAA Privacy Rule Impedes Biomedical
+Research, Biotech Business Week, retrieved 17 November
+2009 from LexisNexis Academic
+[79] UK Researchers Given Data Mining Right Under New
+UK Copyright Laws. Out-Law.com. Retrieved 14
+November 2014
+[80] “Licences for Europe - Structured Stakeholder Dialogue
+2013”. European Commission. Retrieved 14 November
+2014.
+[81] “Text and Data Mining:Its importance and the need for
+change in Europe”. Association of European Research Libraries. Retrieved 14 November 2014.
+[82] “Judge grants summary judgment in favor of Google
+Books — a fair use victory”. Lexology.com. Antonelli
+Law Ltd. Retrieved 14 November 2014.
+[83] Mikut, Ralf; Reischl, Markus (September–October
+2011). “Data Mining Tools”. Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery 1 (5): 431–
+445. doi:10.1002/widm.24. Retrieved October 21, 2011.
+
+89
+
+[87] Nisbet, Robert A. (2006); Data Mining Tools: Which One
+is Best for CRM? Part 1, Information Management Special
+Reports, January 2006
+[88] Haughton, Dominique; Deichmann, Joel; Eshghi, Abdolreza; Sayek, Selin; Teebagy, Nicholas; and Topi, Heikki
+(2003); A Review of Software Packages for Data Mining,
+The American Statistician, Vol. 57, No. 4, pp. 290–309
+[89] Goebel, Michael; Gruenwald, Le (1999); A Survey of
+Data Mining and Knowledge Discovery Software Tools,
+SIGKDD Explorations, Vol. 1, Issue 1, pp. 20–33
+
+9.11 Further reading
+• Cabena, Peter; Hadjnian, Pablo; Stadler, Rolf; Verhees, Jaap; and Zanasi, Alessandro (1997); Discovering Data Mining: From Concept to Implementation,
+Prentice Hall, ISBN 0-13-743980-6
+• M.S. Chen, J. Han, P.S. Yu (1996) "Data mining: an
+overview from a database perspective". Knowledge
+and data Engineering, IEEE Transactions on 8 (6),
+866-883
+• Feldman, Ronen; and Sanger, James; The Text Mining Handbook, Cambridge University Press, ISBN
+978-0-521-83657-9
+• Guo, Yike; and Grossman, Robert (editors) (1999);
+High Performance Data Mining: Scaling Algorithms,
+Applications and Systems, Kluwer Academic Publishers
+• Han, Jiawei, Micheline Kamber, and Jian Pei. Data
+mining: concepts and techniques. Morgan kaufmann, 2006.
+• Hastie, Trevor, Tibshirani, Robert and Friedman,
+Jerome (2001); The Elements of Statistical Learning:
+Data Mining, Inference, and Prediction, Springer,
+ISBN 0-387-95284-5
+• Liu, Bing (2007); Web Data Mining: Exploring Hyperlinks, Contents and Usage Data, Springer, ISBN
+3-540-37881-2
+• Murphy, Chris (16 May 2011). “Is Data Mining
+Free Speech?". InformationWeek (UMB): 12.
+
+[84] Karl Rexer, Heather Allen, & Paul Gearan (2011);
+Understanding Data Miners, Analytics Magazine,
+May/June 2011 (INFORMS: Institute for Operations
+Research and the Management Sciences).
+
+• Nisbet, Robert; Elder, John; Miner, Gary (2009);
+Handbook of Statistical Analysis & Data Mining Applications, Academic Press/Elsevier, ISBN 978-012-374765-5
+
+[85] Kobielus, James; The Forrester Wave: Predictive Analytics
+and Data Mining Solutions, Q1 2010, Forrester Research,
+1 July 2008
+
+• Poncelet, Pascal; Masseglia, Florent; and Teisseire,
+Maguelonne (editors) (October 2007); “Data Mining Patterns: New Methods and Applications”, Information Science Reference, ISBN 978-1-59904162-9
+
+[86] Herschel, Gareth; Magic Quadrant for Customer DataMining Applications, Gartner Inc., 1 July 2008
+
+90
+• Tan, Pang-Ning; Steinbach, Michael; and Kumar,
+Vipin (2005); Introduction to Data Mining, ISBN 0321-32136-7
+• Theodoridis, Sergios; and Koutroumbas, Konstantinos (2009); Pattern Recognition, 4th Edition, Academic Press, ISBN 978-1-59749-272-0
+• Weiss, Sholom M.; and Indurkhya, Nitin (1998);
+Predictive Data Mining, Morgan Kaufmann
+• Witten, Ian H.; Frank, Eibe; Hall, Mark A. (30 January 2011). Data Mining: Practical Machine Learning Tools and Techniques (3 ed.). Elsevier. ISBN
+978-0-12-374856-0. (See also Free Weka software)
+• Ye, Nong (2003); The Handbook of Data Mining,
+Mahwah, NJ: Lawrence Erlbaum
+
+9.12 External links
+
+CHAPTER 9. DATA MINING
+
+
